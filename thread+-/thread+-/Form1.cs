@@ -8,60 +8,40 @@ namespace thread__
             CheckForIllegalCrossThreadCalls = false;
         }
 
+        private Label etichetta()
+        {
+            if (radioButton1.Checked == true)
+                return label1;
+            if (radioButton2.Checked == true)
+                return label2;
+            if (radioButton3.Checked == true)
+                return label3;
+            else
+                return null;
+        }
+        
         private void Meno_Click(object sender, EventArgs e)
         {
+            Label label = etichetta();
+            int valore = Convert.ToInt16(label.Text);
             while (true)
             {
-                if (radioButton1.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label1.Text);
-                    Thread.Sleep(1000);
-                    valore--;
-                    label1.Text = valore.ToString();
-                }
-                if (radioButton2.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label2.Text);
-                    Thread.Sleep(1000);
-                    valore--;
-                    label2.Text = valore.ToString();
-                }
-                if (radioButton3.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label3.Text);
-                    Thread.Sleep(1000);
-                    valore--;
-                    label3.Text = valore.ToString();
-                }
+                Thread.Sleep(1000);
+                valore--;
+                label.Text = (valore).ToString();
             }
         }
         
 
         private void Piu_Click(object sender, EventArgs e)
         {
+            Label label = etichetta();
+            int valore = Convert.ToInt16(label.Text);
             while (true)
             {
-                if (radioButton1.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label1.Text);
-                    Thread.Sleep(1000);
-                    valore++;
-                    label1.Text = valore.ToString();
-                }
-                if (radioButton2.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label2.Text);
-                    Thread.Sleep(1000);
-                    valore++;
-                    label2.Text = valore.ToString();
-                }
-                if (radioButton3.Checked == true)
-                {
-                    int valore = Convert.ToInt16(label3.Text);
-                    Thread.Sleep(1000);
-                    valore++;
-                    label3.Text = valore.ToString();
-                }
+                Thread.Sleep(1000);
+                valore++;
+                label.Text = valore.ToString();
             }
         }
 
@@ -78,35 +58,13 @@ namespace thread__
         private void TMeno_Click(object sender, EventArgs e)
         {
             Thread meno = new Thread(threadMeno);
-            if (radioButton1.Checked == true)
-            {
-                meno.Start(label1);
-            }
-            if (radioButton2.Checked == true)
-            {
-                meno.Start(label2);
-            }
-            if (radioButton3.Checked == true)
-            {
-                meno.Start(label3);
-            }
+            meno.Start(etichetta());
         }
 
         private void TPiu_Click(object sender, EventArgs e)
         {
             Thread piu = new Thread(threadPiu);
-            if (radioButton1.Checked == true)
-            {
-                piu.Start(label1);
-            }
-            if (radioButton2.Checked == true)
-            {
-                piu.Start(label2);
-            }
-            if (radioButton3.Checked == true)
-            {
-                piu.Start(label3);
-            }
+            piu.Start(etichetta());
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
